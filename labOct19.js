@@ -38,7 +38,7 @@ console.log(dog['dogName']);
 */
 
 let favoriteThings = {
-  favBand:  'junior kimbrough',
+  favBand: 'junior kimbrough',
   favFood: 'durian',
   favPerson: 'joan of arc',
   favBook: 'just kids',
@@ -48,22 +48,17 @@ let favoriteThings = {
 /*
   After you've made your object, use bracket or dot notation to add another key named 'car' with the value being your favorite car and then another key named 'show' with the value being your favorite show.
 */
-
 favoriteThings.car = '95 Jeep Cherokee'
 favoriteThings.show = 'sopranos'
-
-
 /*
   Now use bracket or dot notation to change the value of the food key in your favoriteThings object to be 'Chicken Nuggets'
   and change the value of the book key in your favoriteThings object to be 'Harry Potter'. (If they were either of those things already, change them to something else.)
 */
-
-favoriteThings.favFood = 'Chicken Nuggets'
-favoriteThings.favBook = 'Harry Potter'
-// console.log(favoriteThings)
+//
+favoriteThings.favFood = 'Chicken Nuggets';
+favoriteThings.favBook = 'Harry Potter';
 
 //////////////////////////// PROBLEM 6 ////////////////////////////
-
 // Do not edit the code below.
 var carDetails = {
   color: 'red',
@@ -77,29 +72,27 @@ var carDetails = {
 */
 let {color: newColor, make: vehicleMake, model: vehicleModel, year: vehicleYear} = carDetails
 
-
-
-
 //////////////////////////// PROBLEM 7 ////////////////////////////
-
 /*
   In the function below named greeting, it is receiving an object as a parameter. 
   Use object destructuring to save the object properties to new variables. 
   The property names are firstName, lastName, and title.
 */
-
-function greeting( obj ) {
+let obj = {
+  objTitle: 'Senor',
+  objFirstName: 'Logan',
+  objLastName: 'Young'  
+}
+function greeting(someObject) {
   //Code Here
-  
+  let {objTitle: title, objFirstName: firstName, objLastName: lastName} = someObject;
   // Do not edit the code below.
   return 'Hello, ' + title + ' ' + firstName + ' ' + lastName + '!';
   // Do not edit the code above.
 }
-
-
+console.log(greeting(obj));
 
 //////////////////////////// PROBLEM 8 ////////////////////////////
-
 /*
   Write a function called totalPopulation that will take in an object.
   That object will have 4 properties named utah, california, texas and arizona.
@@ -107,13 +100,23 @@ function greeting( obj ) {
   Use object destructuring to save the property values to new variables.
   Sum up the values and return the total number.
 */
-
-//Code Here
-
-
+// let stateProps = {
+//   utah: 3,
+//   california: 4,
+//   texas: 5,
+//   arizona: 6
+// }
+function totalPopulation(randomObject){
+  let {utah: utahNum, california: caliNum, texas: texNum, arizon: azNum} = randomObject
+  var propValue = 0;
+  for(let key in randomObject){
+    propValue += randomObject[key];
+  }
+  return propValue;
+}
+ //console.log(totalPopulation(stateProps));
 
 //////////////////////////// PROBLEM 9 ////////////////////////////
-
 /*
   Write a function called ingredients that will take in an object. 
   This object will have 3 properties named carb, fat, and protein. 
@@ -121,10 +124,14 @@ function greeting( obj ) {
   Use object destructuring to save the property values to new variables. 
   Push these new variables to an array and return the array. 
 */
-
-//Code Here
-
-
+function ingredients(randObject){
+  let {carb: arrCarb, fat: arrFat, protein: arrProtein} = randObject;
+  let newArr = [];
+  for (let key in randObject){
+    newArr.push(randObject[key])
+  }
+  return newArr;
+}
 
 //////////////////////////// PROBLEM 10 ////////////////////////////
 // Do not edit the code below.
@@ -137,23 +144,20 @@ var user = {
   username: 'bryansmith33'
 };
 // Do not edit the code above.
-
 /*
   Let's say I, the user, decided to change my name and email address to the following:
   name -> 'Bryan G. Smith' and email -> 'bryan.smith@devmounta.in'.
   Make that change without modifying the original object code above.
 */
-
-//Code Here
-
+user.name = 'Bryan G. Smith';
+user.email = 'bryan.smith@devmounta.in';
+//console.log(user['name'])
 
 //////////////////////////// PROBLEM 11 ////////////////////////////
 /*
   Using the user object above, delete the users age off of the object.
 */
-
-//Code Here
-
+delete user.age;
 
 //////////////////////////// PROBLEM 12 ////////////////////////////
 /*
@@ -161,10 +165,16 @@ var user = {
   Outside of your class, create an instance of your cat, passing in whatever values you would like.
   Print the name of your cat instance using dot notation.
 */
+class Cat {
+  constructor(name, age, color) {
+    this.name = name
+    this.age = age
+    this.color = color
+  }
+}
+let saetia = new Cat('Saetia', 8, 'Pink')
 
-//Code here
-
-
+console.log(saetia.name)
 
 //////////////////////////// PROBLEM 13 ////////////////////////////
 /*
@@ -173,35 +183,44 @@ var user = {
   Outside of your class, create an instance of your Wizard, passing in whatever values you would like.
   Call the castSpell function on the instance of your wizard.
 */
+class Wizard {
+    constructor(name, age, favoriteSpell) {
+      this.name = name;
+      this.age = age;
+      this.favoriteSpell = favoriteSpell;
+    }
 
-//Code here
+     castSpell(){
+      console.log(`${this.name} has cast ${this.favoriteSpell}!`)
+    }
+}
 
+let myWiz = new Wizard('Loganthar', 125, 'Simulacrum')
+myWiz.castSpell();
 //////////////////////////// PROBLEM 14 ////////////////////////////
-/*
-    Write a class called Phone. We'll use it as if we were creating
-    phone objects to keep track of inventory using an app.
 
-    Phone will build phone objects with brand, model, storage, color, price, and sold properties.
+//     Write a class called Phone. We'll use it as if we were creating
+//     phone objects to keep track of inventory using an app.
 
-    Write a constructor that sets those values -- all of the values 
-    should come from the constructors parameters except sold, which
-    should always be set to false. We want that to be false since 
-    when we create a new phone, we're putting it in our inventory
-    and it won't be sold yet. 
 
-    Create a method called 'sell'.
-    sell should be a function that changes the value of sold to true and prints the string: '{brand} {model} has been sold.'
-    
-    Create another method called 'changePrice'. We can use this 
-    to change the price in case a phone isn't selling.
-    changePrice should take in one argument, 'newPrice'. 
-    Inside the function, reassign the value of the object's price
-    to be newPrice.
-*/
 
-//Code Here
 
-  
+//     Phone will build phone objects with brand, model, storage, color, price, and sold properties.
+
+//     Write a constructor that sets those values -- all of the values 
+//     should come from the constructors parameters except sold, which
+//     should always be set to false. We want that to be false since 
+//     when we create a new phone, we're putting it in our inventory
+//     and it won't be sold yet. 
+//     Create a method called 'sell'.
+//     sell should be a function that changes the value of sold to true and prints the string: '{brand} {model} has been sold.'
+//     Create another method called 'changePrice'. We can use this 
+//     to change the price in case a phone isn't selling.
+//     changePrice should take in one argument, 'newPrice'. 
+//     Inside the function, reassign the value of the object's price
+//     to be newPrice.
+// 
+
 /*
     Next make three new phone instances using your class.
     Send in values of your choice. They should match these data types:
@@ -212,7 +231,35 @@ var user = {
     - price: number
 */
 
-//Code Here
+class Phone {
+    constructor(brand, model, storage, color, price) {
+      this.brand = brand;
+      this.model = model;
+      this.storage = storage;
+      this.color = color;
+      this.price = price;
+      this.sold = false;
+    }
+
+    sell() {
+      this.sold = true;
+      console.log()
+      console.log(`${this.brand, this.model} has been sold.`);
+    }
+
+    changePrice(newPrice) {
+      this.price = newPrice;
+      return this.price;
+    }
+}
+
+let iPhone = new Phone('apple', 'iPhone 7', 16, 'jet black', 160);
+
+let android13 = new Phone('android', '13', 13, 'ice blue', 130);
+let googlePix = new Phone('google', 'pixel', 32, 'chrome', 200);
+ iPhone.sell();
+// iPhone.changePrice('$1')
+// console.log(iPhone.price)
 
 /* 
   Call the changePrice function on one of your phones, 
